@@ -14,13 +14,13 @@ import static org.assertj.core.util.Arrays.isNullOrEmpty;
 /**
  * Utility methods for verifications of visibility and synchronizations between page actions.
  */
-public class BaseWaitAndVisibilityActions {
+public class WaitAndVisibilityUtils {
 
     private WebDriver webDriver;
 
     private static final Logger LOG = LogManager.getFormatterLogger();
 
-    public BaseWaitAndVisibilityActions(WebDriver webDriver) {
+    public WaitAndVisibilityUtils(WebDriver webDriver) {
         this.webDriver = webDriver;
     }
 

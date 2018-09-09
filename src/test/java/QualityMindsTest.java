@@ -7,7 +7,7 @@ import selenium.BaseTest;
 import selenium.pageobjects.MenuBarPOC;
 import selenium.pageobjects.ModalPanelPO;
 import selenium.pageobjects.ServicesPO;
-import selenium.utils.BaseWaitAndVisibilityActions;
+import selenium.utils.WaitAndVisibilityUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,7 +35,7 @@ public class QualityMindsTest extends BaseTest {
 
         LOG.debug("Click 'en' button");
         menuBar.linkLangSwitcherEn().click();
-        new BaseWaitAndVisibilityActions(webDriver).waitForPageReload();
+        new WaitAndVisibilityUtils(webDriver).waitForPageReload();
         SoftAssertions.assertSoftly(softAssertions -> {
             softAssertions.assertThat(webDriver.findElement(By.tagName("html")).getAttribute("lang"))
                     .as("Page language version")
@@ -54,7 +54,7 @@ public class QualityMindsTest extends BaseTest {
         MenuBarPOC menuBarPO = new MenuBarPOC(webDriver);
         LOG.debug("Hover [Services]");
         mouseHover(menuBarPO.menuItemServices());
-        BaseWaitAndVisibilityActions baseWaitAndVisibilityActions = new BaseWaitAndVisibilityActions(webDriver);
+        WaitAndVisibilityUtils baseWaitAndVisibilityActions = new WaitAndVisibilityUtils(webDriver);
         baseWaitAndVisibilityActions.waitForWebElement(menuBarPO.subMenuItemMobileTestingSelector, 5, "submenu [Mobile Testing]");
         LOG.debug("Click [Mobile Testing]");
         menuBarPO.subMenuItemMobileTesting().click();
@@ -87,7 +87,7 @@ public class QualityMindsTest extends BaseTest {
         LOG.debug("Click [Contact] icon");
         new MenuBarPOC(webDriver).btnContact().click();
         ModalPanelPO modalPanelPO = new ModalPanelPO(webDriver);
-        BaseWaitAndVisibilityActions baseWaitAndVisibilityActions = new BaseWaitAndVisibilityActions(webDriver);
+        WaitAndVisibilityUtils baseWaitAndVisibilityActions = new WaitAndVisibilityUtils(webDriver);
         baseWaitAndVisibilityActions.waitForWebElement(modalPanelPO.h2Selector, 10, "panel [Contact us]");
 
         LOG.debug("Click [Submit]");
