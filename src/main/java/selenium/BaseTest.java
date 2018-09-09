@@ -11,6 +11,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.ITestResult;
@@ -37,7 +38,7 @@ public class BaseTest {
 
     @Parameters("browser") // defined in TestNG suite
     @BeforeMethod(alwaysRun = true)
-    public void initWebDriver(@Optional("firefox") String browser) { // if no param given then execute tests on Firefox
+    public void initWebDriver(@Optional("chrome") String browser) { // if no param given then execute tests on this browser
         this.browser = browser.toUpperCase();
         switch (browser.toLowerCase()) {
             case "firefox":
@@ -47,9 +48,13 @@ public class BaseTest {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", new File("src/test/resources/webdrivers/chromedriver_2.40.exe").getAbsolutePath());
                 webDriver = new ChromeDriver();
-                break;
             case "chrome_headless":
-
+                System.setProperty("webdriver.chrome.driver", new File("src/test/resources/webdrivers/chromedriver_2.40.exe").getAbsolutePath());
+                ChromeOptions options = new ChromeOptions()
+                        .setHeadless(true)
+                        .addArguments("window-size=1920x1080"); // must set window size large enough, it's too small by default
+                webDriver = new ChromeDriver(options);
+                break;
             default:
                 Assertions.fail("Browser %s not supported", browser);
         }

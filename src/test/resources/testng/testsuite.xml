@@ -8,7 +8,7 @@
     </test>
 
     <test name="ChromeTest">
-        <parameter name="browser" value="chrome" />
+        <parameter name="browser" value="chrome" /> <!-- can be chrome_headless as well -->
         <classes>
             <class name="QualityMindsTest" />
         </classes>

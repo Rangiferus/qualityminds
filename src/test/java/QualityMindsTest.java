@@ -10,6 +10,7 @@ import selenium.pageobjects.ServicesPO;
 import selenium.utils.WaitAndVisibilityUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static selenium.utils.WaitAndVisibilityUtils.sleepMillis;
 
 /**
  * Coding challenge for Quality Minds
@@ -55,20 +56,22 @@ public class QualityMindsTest extends BaseTest {
         LOG.debug("Hover [Services]");
         mouseHover(menuBarPO.menuItemServices());
         WaitAndVisibilityUtils baseWaitAndVisibilityActions = new WaitAndVisibilityUtils(webDriver);
-        baseWaitAndVisibilityActions.waitForWebElement(menuBarPO.subMenuItemMobileTestingSelector, 5, "submenu [Mobile Testing]");
+        baseWaitAndVisibilityActions.waitForWebElement(menuBarPO.subMenuItemMobileTestingSelector, 10, "submenu [Mobile Testing]");
         LOG.debug("Click [Mobile Testing]");
         menuBarPO.subMenuItemMobileTesting().click();
 
         ServicesPO servicesPO = new ServicesPO(webDriver);
-        baseWaitAndVisibilityActions.waitForWebElement(servicesPO.btnMoreSelector, 5, "button [more]");
+        baseWaitAndVisibilityActions.waitForWebElement(servicesPO.btnMoreSelector, 10, "button [more]");
+        sleepMillis(500); // allow some time to finish animation
         assertThat(menuBarPO.menuItemServices().getAttribute("class"))
                 .withFailMessage("'Services' menu is not highlighted")
-                .contains("active");
+                .contains("active-trail");
 
         LOG.debug("Click [more]");
         servicesPO.btnMore().click();
         ModalPanelPO modalPanelPO = new ModalPanelPO(webDriver);
         baseWaitAndVisibilityActions.waitForWebElement(modalPanelPO.h2Selector, 10, "panel [Contact]");
+        sleepMillis(500); // allow some time to finish animation
         assertThat(modalPanelPO.panelContent().getText())
                 .as("Contact information")
                 .contains("Ron Werner");
