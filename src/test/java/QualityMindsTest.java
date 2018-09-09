@@ -96,15 +96,16 @@ public class QualityMindsTest extends BaseTest {
                 .withFailMessage("Error box was not displayed")
                 .isTrue();
         SoftAssertions.assertSoftly(softAssertions -> {
-           softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
+            softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
                     .contains("Name, Surname field is required.");
-           softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
+            softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
                     .contains("E-mail field is required.");
-           softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
+            softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
-                    .contains("Subject field is required.");           softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
+                    .contains("Subject field is required.");
+            softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
                     .contains("Message field is required.");
         });
@@ -126,7 +127,8 @@ public class QualityMindsTest extends BaseTest {
                     .contains("E-mail field is required.");
             softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
-                    .contains("Subject field is required.");           softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
+                    .contains("Subject field is required.");
+            softAssertions.assertThat(modalPanelPO.boxMessageError().getText())
                     .as("Warning message")
                     .contains("Message field is required.");
         });

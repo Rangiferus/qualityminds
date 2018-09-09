@@ -42,6 +42,7 @@ public class WaitAndVisibilityUtils {
 
     /**
      * Waits for element visibility with timeout.
+     *
      * @param elementDescription optional element description for log
      * @return true if element was found and is visible, false otherwise
      */
@@ -85,6 +86,7 @@ public class WaitAndVisibilityUtils {
 
     /**
      * Waits for element invisibility with timeout.
+     *
      * @param elementDescription optional description for log
      * @return true if element is no longer visible, false otherwise
      */
@@ -102,7 +104,7 @@ public class WaitAndVisibilityUtils {
         // WebDriverWait action consumes more time than it's needed to verify element invisibility so let's do it own way
         long startTime = System.currentTimeMillis();
         while (isWebElementDisplayed(selector)) {
-            if ((System.currentTimeMillis() - startTime)/1000 >= timeoutInSeconds) {
+            if ((System.currentTimeMillis() - startTime) / 1000 >= timeoutInSeconds) {
                 LOG.warn("Element still visible after %d sec: %s", timeoutInSeconds, description);
                 return false;
             }
@@ -111,12 +113,8 @@ public class WaitAndVisibilityUtils {
     }
 
     public void waitForPageReload() {
-        ExpectedCondition<Boolean> expectation = new
-                ExpectedCondition<Boolean>() {
-                    public Boolean apply(WebDriver driver) {
-                        return ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
-                    }
-                };
+        ExpectedCondition<Boolean> expectation = driver ->
+                ((JavascriptExecutor) driver).executeScript("return document.readyState").toString().equals("complete");
         try {
             sleep(1);
             WebDriverWait wait = new WebDriverWait(webDriver, 30);
